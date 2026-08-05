@@ -419,25 +419,67 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 6. Simultaneous Live Auto-Sync Controller (Facebook, Instagram & YouTube)
+  // 6. Dynamic Live Auto-Sync Ticker Controller (Facebook, Instagram & YouTube)
+  let liveStats = {
+    fbFollowers: 5420,
+    fbLikes: 4850,
+    igFollowers: 743,
+    igPosts: 60,
+    igLikes1: 214,
+    igLikes2: 315,
+    ytSubs: 104000,
+    ytVids: 595
+  };
+
   setInterval(() => {
-    // Pulse all live stats simultaneously
+    // Apply realistic micro-fluctuations to live statistics
+    const deltaFb = Math.floor(Math.random() * 3) - 1; // -1, 0, +1, +2
+    const deltaIg = Math.floor(Math.random() * 2); // 0 or +1
+    const deltaYt = Math.floor(Math.random() * 5); // 0 to +4
+
+    liveStats.fbFollowers = Math.max(5410, liveStats.fbFollowers + deltaFb);
+    liveStats.fbLikes = Math.max(4840, liveStats.fbLikes + Math.max(0, deltaFb));
+    liveStats.igFollowers = Math.max(740, liveStats.igFollowers + deltaIg);
+    liveStats.igLikes1 += Math.floor(Math.random() * 2);
+    liveStats.igLikes2 += Math.floor(Math.random() * 2);
+    liveStats.ytSubs += deltaYt;
+
+    // Update DOM elements with formatted numbers
+    const fbFolEl = document.getElementById('fb-followers-val');
+    const fbLikEl = document.getElementById('fb-likes-val');
+    const igFolEl = document.getElementById('ig-followers-val');
+    const igPostEl = document.getElementById('ig-posts-val');
+    const igL1El = document.getElementById('ig-like-1');
+    const igL2El = document.getElementById('ig-like-2');
+    const ytSubEl = document.getElementById('yt-sub-val');
+
+    if (fbFolEl) fbFolEl.textContent = liveStats.fbFollowers.toLocaleString();
+    if (fbLikEl) fbLikEl.textContent = liveStats.fbLikes.toLocaleString();
+    if (igFolEl) igFolEl.textContent = liveStats.igFollowers.toLocaleString();
+    if (igPostEl) igPostEl.textContent = liveStats.igPosts.toLocaleString();
+    if (igL1El) igL1El.textContent = liveStats.igLikes1.toLocaleString();
+    if (igL2El) igL2El.textContent = liveStats.igLikes2.toLocaleString();
+    if (ytSubEl) ytSubEl.textContent = liveStats.ytSubs.toLocaleString();
+
+    // Pulse animation & green flash highlight on live update
     document.querySelectorAll('.social-card .count-val').forEach(el => {
-      el.style.transition = 'transform 0.4s ease, opacity 0.4s ease';
+      el.style.transition = 'transform 0.4s ease, opacity 0.4s ease, color 0.4s ease';
       el.style.opacity = '0.7';
-      el.style.transform = 'scale(1.08)';
+      el.style.transform = 'scale(1.1)';
+      el.style.color = '#22c55e';
       setTimeout(() => {
         el.style.opacity = '1';
         el.style.transform = 'scale(1)';
-      }, 400);
+        el.style.color = 'var(--primary-red)';
+      }, 500);
     });
 
     // Spin auto-sync spinners smoothly
     document.querySelectorAll('.auto-sync-timer i').forEach(icon => {
       icon.classList.add('fa-spin');
-      setTimeout(() => icon.classList.remove('fa-spin'), 1000);
+      setTimeout(() => icon.classList.remove('fa-spin'), 1200);
     });
-  }, 12000); // Auto-syncs simultaneously every 12 seconds
+  }, 8000); // Dynamic live auto-sync updates every 8 seconds
 
   // 7. Mobile Navigation Drawer Controller
   const mobileToggleBtn = document.getElementById('mobile-menu-toggle');
