@@ -621,61 +621,7 @@ document.addEventListener('DOMContentLoaded', () => {
     renderFbPosts();
   }, 15000);
 
-  // 9. Admin Post Studio Controller
-  const openAdminBtn = document.getElementById('open-admin-post-btn');
-  const adminModal = document.getElementById('admin-post-modal');
-  const closeAdminBtn = document.getElementById('admin-modal-close');
-  const adminForm = document.getElementById('admin-publish-form');
 
-  if (openAdminBtn && adminModal) {
-    openAdminBtn.addEventListener('click', () => {
-      adminModal.style.display = 'flex';
-    });
-  }
-
-  if (closeAdminBtn && adminModal) {
-    closeAdminBtn.addEventListener('click', () => {
-      adminModal.style.display = 'none';
-    });
-  }
-
-  if (adminModal) {
-    adminModal.addEventListener('click', (e) => {
-      if (e.target === adminModal) adminModal.style.display = 'none';
-    });
-  }
-
-  if (adminForm) {
-    adminForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const caption = document.getElementById('admin-post-caption').value.trim();
-      const media = document.getElementById('admin-post-media').value.trim();
-
-      if (!caption) return;
-
-      const newPost = {
-        author: "LAMKA TALK 2.0",
-        time: "Just now",
-        badge: "ADMIN POST",
-        icon: "fa-solid fa-pen-to-square",
-        badgeColor: "#22c55e",
-        poster: "assets/lamka_talk_logo.png",
-        videoUrl: media || "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
-        text: caption,
-        likes: 1,
-        comments: 0
-      };
-
-      // Add to top of post pool & reset index to 0
-      fbPostPool.unshift(newPost);
-      postIndex = 0;
-      renderFbPosts();
-
-      adminModal.style.display = 'none';
-      adminForm.reset();
-      alert("🎉 Post published live to your website feed!");
-    });
-  }
 
   // 10. Editor-in-Chief News Desk Publishing Controller & Security Passcode System
   const getAdminPin = () => localStorage.getItem('admin_passcode') || '1234';
