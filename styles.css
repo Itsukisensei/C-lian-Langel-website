@@ -1528,7 +1528,27 @@ footer {
   }
 }
 
+/* Mobile Strict Horizontal Overflow Lock */
 @media (max-width: 768px) {
+  html, body {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+    touch-action: pan-y;
+    position: relative !important;
+  }
+
+  body * {
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .top-bar, .main-header, .hero-section, .social-section, .epaper-section, .youtube-section, .contact-section, footer {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+  }
+
   .mobile-menu-toggle {
     display: flex;
   }
@@ -1569,6 +1589,14 @@ footer {
     align-items: center;
     gap: 8px;
     text-align: center;
+    width: 100% !important;
+    overflow: hidden !important;
+  }
+
+  .ticker-wrap {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow: hidden !important;
   }
   
   .header-cta {
@@ -1599,11 +1627,13 @@ footer {
 
   .portrait-card {
     max-height: 400px;
+    width: 100% !important;
   }
 
   .social-tabs {
     flex-wrap: wrap;
     justify-content: center;
+    width: 100% !important;
   }
 
   .social-tab-btn {
@@ -1653,11 +1683,11 @@ footer {
 
 @media (max-width: 480px) {
   .container {
-    padding: 0 1rem;
+    padding: 0 0.8rem !important;
   }
 
   .hero-name {
-    font-size: 1.8rem;
+    font-size: 1.7rem;
   }
 
   .hero-actions {
