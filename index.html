@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <!-- Custom Stylesheet -->
-  <link rel="stylesheet" href="styles.css?v=2.5">
+  <link rel="stylesheet" href="styles.css?v=2.6">
 </head>
 <body>
 
@@ -703,38 +703,37 @@
     </div>
   </div>
 
-  <!-- Editor Desk News Modal (Admin Only) -->
+  <!-- Editor Desk: Simple PDF & Newspaper Upload Modal -->
   <div id="admin-news-modal" class="modal-backdrop" style="display:none;">
-    <div class="modal-container" style="max-width:580px; height:auto; padding:0; border-radius:12px; border:1px solid var(--primary-red);">
+    <div class="modal-container" style="max-width:540px; height:auto; padding:0; border-radius:12px; border:1px solid var(--primary-red);">
       <div class="modal-header" style="background:#121620; padding:1.2rem 1.5rem;">
-        <span class="modal-title" style="color:#fff; font-size:1.1rem;"><i class="fa-solid fa-newspaper" style="color:#e61924;"></i> Editor-in-Chief Desk: Publish News Article</span>
+        <span class="modal-title" style="color:#fff; font-size:1.1rem;"><i class="fa-solid fa-file-pdf" style="color:#e61924;"></i> Upload Newspaper PDF / Image Edition</span>
         <button id="admin-news-modal-close" class="close-btn">&times;</button>
       </div>
       <div style="padding:1.5rem; background:#090a0f;">
         <form id="admin-news-form">
           <div class="form-group" style="margin-bottom:1rem;">
-            <label style="display:block; font-size:0.85rem; color:#aaa; margin-bottom:6px; font-weight:600;">News Category</label>
-            <select id="admin-news-category" style="width:100%; padding:10px; background:#181d28; color:#fff; border:1px solid rgba(255,255,255,0.15); border-radius:8px;">
-              <option value="BREAKING NEWS">🔴 BREAKING NEWS (Updates Top Ticker)</option>
-              <option value="LOCAL NEWS">📰 LOCAL NEWS (Churachandpur / Lamka)</option>
-              <option value="SPECIAL REPORT">⭐ SPECIAL REPORT (The Lamka Times)</option>
-              <option value="EDITORIAL">✍️ EDITORIAL &amp; ANNOUNCEMENT</option>
-            </select>
+            <label style="display:block; font-size:0.85rem; color:#aaa; margin-bottom:6px; font-weight:600;">Edition Date &amp; Title</label>
+            <input type="text" id="admin-news-headline" placeholder="e.g. Vol IV No. 036 - August 06, 2026" required style="width:100%; padding:10px; background:#181d28; color:#fff; border:1px solid rgba(255,255,255,0.15); border-radius:8px;">
           </div>
+          
           <div class="form-group" style="margin-bottom:1rem;">
-            <label style="display:block; font-size:0.85rem; color:#aaa; margin-bottom:6px; font-weight:600;">Article Headline / News Title</label>
-            <input type="text" id="admin-news-headline" placeholder="Type breaking headline or story title..." required style="width:100%; padding:10px; background:#181d28; color:#fff; border:1px solid rgba(255,255,255,0.15); border-radius:8px;">
+            <label style="display:block; font-size:0.85rem; color:#aaa; margin-bottom:6px; font-weight:600;"><i class="fa-solid fa-upload" style="color:#22c55e;"></i> Choose Newspaper PDF or Image File</label>
+            <input type="file" id="admin-news-file" accept=".pdf,image/*" style="width:100%; padding:10px; background:#181d28; color:#fff; border:1px dashed rgba(255,255,255,0.3); border-radius:8px; cursor:pointer;">
           </div>
+
           <div class="form-group" style="margin-bottom:1rem;">
-            <label style="display:block; font-size:0.85rem; color:#aaa; margin-bottom:6px; font-weight:600;">Full News Summary / Content</label>
-            <textarea id="admin-news-content" rows="4" placeholder="Write news details, press release, or article summary here..." required style="width:100%; padding:10px; background:#181d28; color:#fff; border:1px solid rgba(255,255,255,0.15); border-radius:8px; font-family:inherit;"></textarea>
+            <label style="display:block; font-size:0.85rem; color:#aaa; margin-bottom:6px; font-weight:600;">Or Paste PDF / Image Link</label>
+            <input type="text" id="admin-news-content" placeholder="e.g. https://... or leave blank if file selected" style="width:100%; padding:10px; background:#181d28; color:#fff; border:1px solid rgba(255,255,255,0.15); border-radius:8px;">
           </div>
+
           <div class="form-group" style="margin-bottom:1.5rem;">
             <label style="display:block; font-size:0.85rem; color:#aaa; margin-bottom:6px; font-weight:600;">Admin Security Passcode / PIN</label>
             <input type="password" id="admin-news-pin" placeholder="Enter Admin Passcode (Default: 1234)" required style="width:100%; padding:10px; background:#181d28; color:#fff; border:1px solid rgba(230,25,36,0.5); border-radius:8px;">
           </div>
+          
           <button type="submit" class="btn btn-primary" style="width:100%; background:linear-gradient(135deg, #e61924 0%, #990000 100%); border:none; padding:12px; font-size:1rem; font-weight:700; cursor:pointer;">
-            <i class="fa-solid fa-paper-plane"></i> Publish News to Live Website
+            <i class="fa-solid fa-cloud-arrow-up"></i> Upload &amp; Publish Newspaper Edition
           </button>
         </form>
       </div>
@@ -742,6 +741,6 @@
   </div>
 
   <!-- App Logic JS -->
-  <script src="app.js?v=2.5"></script>
+  <script src="app.js?v=2.6"></script>
 </body>
 </html>

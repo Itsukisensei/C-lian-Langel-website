@@ -711,39 +711,73 @@ document.addEventListener('DOMContentLoaded', () => {
   if (adminNewsForm) {
     adminNewsForm.addEventListener('submit', (e) => {
       e.preventDefault();
-      const category = document.getElementById('admin-news-category').value;
       const headline = document.getElementById('admin-news-headline').value.trim();
-      const content = document.getElementById('admin-news-content').value.trim();
+      const fileInput = document.getElementById('admin-news-file');
+      const urlInput = document.getElementById('admin-news-content').value.trim();
       const pin = document.getElementById('admin-news-pin').value.trim();
 
       if (pin !== '1234' && pin !== 'admin' && pin !== '7005434961') {
-        alert("❌ Incorrect Security Passcode! News article was not published.");
+        alert("❌ Incorrect Security Passcode! Upload denied.");
         return;
       }
 
-      if (!headline || !content) return;
+      if (!headline) return;
 
-      // Update breaking news ticker at top of site
-      const tickerContent = document.querySelector('.ticker-content');
-      if (tickerContent) {
-        tickerContent.innerHTML = `<strong>${category}:</strong> ${headline} - ${content} &bull; ` + tickerContent.innerHTML;
+      const processPublish = (mediaSrc, isPdf) => {
+        const newKey = 'custom_' + Date.now();
+        EPAPER_EDITIONS[newKey] = {
+          title: headline,
+          pdf: isPdf ? mediaSrc : 'assets/lamka_times_aug5_edition.pdf',
+          totalPages: 1,
+          pages: {
+            1: {
+              image: isPdf ? 'assets/lamka_times_aug5_hd_page_1.png' : mediaSrc,
+              pdfPage: mediaSrc,
+              articles: [
+                {
+                  category: "NEW EDITION",
+                  headline: headline,
+                  snippet: "Official edition published by Editor-in-Chief."
+                }
+              ]
+            }
+          }
+        };
+
+        // Prepend to Edition select dropdown
+        const edSelect = document.getElementById('edition-select');
+        if (edSelect) {
+          const opt = document.createElement('option');
+          opt.value = newKey;
+          opt.textContent = headline + " (NEWLY PUBLISHED)";
+          opt.selected = true;
+          edSelect.insertBefore(opt, edSelect.firstChild);
+        }
+
+        // Render immediately
+        currentEditionKey = newKey;
+        currentPageNum = 1;
+        renderEditionPage(newKey, 1);
+
+        newsAdminModal.style.display = 'none';
+        adminNewsForm.reset();
+        alert("🎉 Newspaper Edition Uploaded & Published Successfully!");
+      };
+
+      if (fileInput && fileInput.files && fileInput.files[0]) {
+        const file = fileInput.files[0];
+        const reader = new FileReader();
+        const isPdf = file.name.toLowerCase().endsWith('.pdf');
+        reader.onload = (evt) => {
+          processPublish(evt.target.result, isPdf);
+        };
+        reader.readAsDataURL(file);
+      } else if (urlInput) {
+        const isPdf = urlInput.toLowerCase().includes('.pdf');
+        processPublish(urlInput, isPdf);
+      } else {
+        alert("Please select a PDF or Image file, or paste a file link!");
       }
-
-      // Add to current E-Paper edition articles list
-      const currentEd = EPAPER_EDITIONS[currentEditionKey];
-      if (currentEd && currentEd.pages && currentEd.pages[currentPageNum]) {
-        if (!currentEd.pages[currentPageNum].articles) currentEd.pages[currentPageNum].articles = [];
-        currentEd.pages[currentPageNum].articles.unshift({
-          category: category,
-          headline: headline,
-          snippet: content
-        });
-        renderEditionPage(currentEditionKey, currentPageNum);
-      }
-
-      newsAdminModal.style.display = 'none';
-      adminNewsForm.reset();
-      alert(`📰 Breaking News Article Published Live to Website!\n\nHeadline: "${headline}"`);
     });
   }
 });
