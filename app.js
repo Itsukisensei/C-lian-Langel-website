@@ -516,6 +516,8 @@ document.addEventListener('DOMContentLoaded', () => {
       badge: "FEATURED MUSIC VIDEO",
       icon: "fa-solid fa-music",
       badgeColor: "#ef4444",
+      poster: "assets/lamka_talk_logo.png",
+      videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
       text: "Na lasak a tak mahmah a enkha ding chi a kilawp lawtel i hi aw nau. Tua hon chial zawmah lai chu hong lawtel ding aw nanau Esther 🔥❤️ <strong style='color:#4BA9FE;'>Esther Hnamte</strong>",
       likes: 142,
       comments: 28
@@ -523,22 +525,14 @@ document.addEventListener('DOMContentLoaded', () => {
     {
       author: "LAMKA TALK 2.0",
       time: "5h ago",
-      badge: "MEDIA REPORT",
-      icon: "fa-solid fa-newspaper",
+      badge: "EXCLUSIVE VIDEO BULLETIN",
+      icon: "fa-solid fa-video",
       badgeColor: "#e61924",
-      text: "Press Desk: Ground reporting &amp; daily print edition updates for <strong>The Lamka Times</strong> &amp; <strong>Lamka Talk 2.0</strong> in Churachandpur, Manipur.",
+      poster: "assets/lamka_talk_header_logo.jpg",
+      videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
+      text: "<strong>LAMKA TALK 2.0:</strong> Live ground reporting &amp; socio-political analysis from Lamka (Churachandpur), Manipur. Hosted by C Lian Langel.",
       likes: 89,
       comments: 15
-    },
-    {
-      author: "LAMKA TALK 2.0",
-      time: "15m ago",
-      badge: "VIDEO REPORT",
-      icon: "fa-solid fa-video",
-      badgeColor: "#e74c3c",
-      text: "Press desk updates: Today's print edition of <strong>The Lamka Times</strong> is available alongside <strong>Lamka Talk 2.0</strong> video bulletins. Connect with us for real-time news coverage.",
-      likes: 124,
-      comments: 29
     },
     {
       author: "C Lian Langel",
@@ -546,6 +540,8 @@ document.addEventListener('DOMContentLoaded', () => {
       badge: "CREATOR POST",
       icon: "fa-solid fa-feather-pointed",
       badgeColor: "#3b82f6",
+      poster: "assets/c_lian_portrait.png",
+      videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
       text: "Bangteng honna post sak na hi ua huirong 😄",
       likes: 95,
       comments: 18
@@ -556,6 +552,8 @@ document.addEventListener('DOMContentLoaded', () => {
       badge: "SPECIAL REEL",
       icon: "fa-solid fa-film",
       badgeColor: "#f59e0b",
+      poster: "assets/lamka_talk_ig_avatar.png",
+      videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4",
       text: "<strong>Host:</strong> Who will win the match, Argentina or England?<br><strong style='color:#1877F2;'>Me:</strong> If it's not Argentina... then it'll be England! 🤣🤣🤣🤣",
       likes: 182,
       comments: 41
@@ -566,19 +564,11 @@ document.addEventListener('DOMContentLoaded', () => {
       badge: "BREAKING NEWS",
       icon: "fa-solid fa-newspaper",
       badgeColor: "#e61924",
+      poster: "assets/lamka_talk_logo.png",
+      videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyflights.mp4",
       text: "<strong>NIT MANIPUR:</strong> Manipur government in NIT Manipur permanent campus om theihna di'n panla...",
       likes: 210,
       comments: 53
-    },
-    {
-      author: "LAMKA TALK 2.0",
-      time: "6h ago",
-      badge: "HEROISM REPORT",
-      icon: "fa-solid fa-shield-halved",
-      badgeColor: "#10b981",
-      text: "<strong>HEROISM:</strong> ZYA Kangkap Unit in tui a kia hunkhia naupang 2 kiang ah pahtawina pia...",
-      likes: 312,
-      comments: 77
     }
   ];
 
@@ -600,8 +590,8 @@ document.addEventListener('DOMContentLoaded', () => {
           ${p1.text}
         </p>
         <div class="fb-video-wrapper" style="position:relative; width:100%; border-radius:10px; overflow:hidden; background:#000; margin-bottom:10px; border:1px solid rgba(255,255,255,0.12);">
-          <video controls poster="assets/lamka_talk_logo.png" style="width:100%; max-height:280px; object-fit:cover; display:block;">
-            <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" type="video/mp4">
+          <video controls poster="${p1.poster}" style="width:100%; max-height:280px; object-fit:cover; display:block;">
+            <source src="${p1.videoUrl}" type="video/mp4">
             Your browser does not support HTML5 video.
           </video>
         </div>
@@ -621,8 +611,8 @@ document.addEventListener('DOMContentLoaded', () => {
           ${p2.text}
         </p>
         <div class="fb-video-wrapper" style="position:relative; width:100%; border-radius:10px; overflow:hidden; background:#000; margin-bottom:10px; border:1px solid rgba(255,255,255,0.12);">
-          <video controls poster="assets/lamka_talk_header_logo.jpg" style="width:100%; max-height:280px; object-fit:cover; display:block;">
-            <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4" type="video/mp4">
+          <video controls poster="${p2.poster}" style="width:100%; max-height:280px; object-fit:cover; display:block;">
+            <source src="${p2.videoUrl}" type="video/mp4">
             Your browser does not support HTML5 video.
           </video>
         </div>
