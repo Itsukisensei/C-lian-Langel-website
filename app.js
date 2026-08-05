@@ -676,20 +676,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 10. Editor-in-Chief News Desk Publishing Controller (Protected with Admin Passcode)
   const openNewsAdminBtn = document.getElementById('admin-news-btn');
+  const topHeaderAdminBtn = document.getElementById('top-header-admin-btn');
   const newsAdminModal = document.getElementById('admin-news-modal');
   const closeNewsAdminBtn = document.getElementById('admin-news-modal-close');
   const adminNewsForm = document.getElementById('admin-news-form');
 
-  if (openNewsAdminBtn && newsAdminModal) {
-    openNewsAdminBtn.addEventListener('click', () => {
-      const pin = prompt("🔒 Editor Desk Security: Enter Admin Passcode (Default: 1234):");
-      if (pin === '1234' || pin === 'admin' || pin === '7005434961') {
-        newsAdminModal.style.display = 'flex';
-      } else if (pin !== null) {
-        alert("❌ Incorrect Admin Passcode! Access Denied.");
-      }
-    });
-  }
+  const triggerAdminNewsModal = () => {
+    const pin = prompt("🔒 Editor Desk Security: Enter Admin Passcode (Default: 1234):");
+    if (pin === '1234' || pin === 'admin' || pin === '7005434961') {
+      newsAdminModal.style.display = 'flex';
+    } else if (pin !== null) {
+      alert("❌ Incorrect Admin Passcode! Access Denied.");
+    }
+  };
+
+  if (openNewsAdminBtn) openNewsAdminBtn.addEventListener('click', triggerAdminNewsModal);
+  if (topHeaderAdminBtn) topHeaderAdminBtn.addEventListener('click', triggerAdminNewsModal);
 
   if (closeNewsAdminBtn && newsAdminModal) {
     closeNewsAdminBtn.addEventListener('click', () => {
