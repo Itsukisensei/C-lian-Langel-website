@@ -673,4 +673,72 @@ document.addEventListener('DOMContentLoaded', () => {
       alert("🎉 Post published live to your website feed!");
     });
   }
+
+  // 10. Editor-in-Chief News Desk Publishing Controller (Protected with Admin Passcode)
+  const openNewsAdminBtn = document.getElementById('admin-news-btn');
+  const newsAdminModal = document.getElementById('admin-news-modal');
+  const closeNewsAdminBtn = document.getElementById('admin-news-modal-close');
+  const adminNewsForm = document.getElementById('admin-news-form');
+
+  if (openNewsAdminBtn && newsAdminModal) {
+    openNewsAdminBtn.addEventListener('click', () => {
+      const pin = prompt("🔒 Editor Desk Security: Enter Admin Passcode (Default: 1234):");
+      if (pin === '1234' || pin === 'admin' || pin === '7005434961') {
+        newsAdminModal.style.display = 'flex';
+      } else if (pin !== null) {
+        alert("❌ Incorrect Admin Passcode! Access Denied.");
+      }
+    });
+  }
+
+  if (closeNewsAdminBtn && newsAdminModal) {
+    closeNewsAdminBtn.addEventListener('click', () => {
+      newsAdminModal.style.display = 'none';
+    });
+  }
+
+  if (newsAdminModal) {
+    newsAdminModal.addEventListener('click', (e) => {
+      if (e.target === newsAdminModal) newsAdminModal.style.display = 'none';
+    });
+  }
+
+  if (adminNewsForm) {
+    adminNewsForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const category = document.getElementById('admin-news-category').value;
+      const headline = document.getElementById('admin-news-headline').value.trim();
+      const content = document.getElementById('admin-news-content').value.trim();
+      const pin = document.getElementById('admin-news-pin').value.trim();
+
+      if (pin !== '1234' && pin !== 'admin' && pin !== '7005434961') {
+        alert("❌ Incorrect Security Passcode! News article was not published.");
+        return;
+      }
+
+      if (!headline || !content) return;
+
+      // Update breaking news ticker at top of site
+      const tickerContent = document.querySelector('.ticker-content');
+      if (tickerContent) {
+        tickerContent.innerHTML = `<strong>${category}:</strong> ${headline} - ${content} &bull; ` + tickerContent.innerHTML;
+      }
+
+      // Add to current E-Paper edition articles list
+      const currentEd = EPAPER_EDITIONS[currentEditionKey];
+      if (currentEd && currentEd.pages && currentEd.pages[currentPageNum]) {
+        if (!currentEd.pages[currentPageNum].articles) currentEd.pages[currentPageNum].articles = [];
+        currentEd.pages[currentPageNum].articles.unshift({
+          category: category,
+          headline: headline,
+          snippet: content
+        });
+        renderEditionPage(currentEditionKey, currentPageNum);
+      }
+
+      newsAdminModal.style.display = 'none';
+      adminNewsForm.reset();
+      alert(`📰 Breaking News Article Published Live to Website!\n\nHeadline: "${headline}"`);
+    });
+  }
 });
