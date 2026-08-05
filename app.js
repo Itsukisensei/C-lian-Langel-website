@@ -596,12 +596,19 @@ document.addEventListener('DOMContentLoaded', () => {
           <span><i class="fa-brands fa-facebook"></i> ${p1.author}</span>
           <span><i class="${p1.icon}" style="font-size:0.75rem; color:${p1.badgeColor};"></i> ${p1.badge} &bull; ${p1.time}</span>
         </div>
-        <p class="post-text" style="font-size:1rem; font-weight:500; line-height:1.5;">
+        <p class="post-text" style="font-size:0.98rem; font-weight:500; line-height:1.5; margin-bottom:10px;">
           ${p1.text}
         </p>
+        <div class="fb-video-wrapper" style="position:relative; width:100%; border-radius:10px; overflow:hidden; background:#000; margin-bottom:10px; border:1px solid rgba(255,255,255,0.12);">
+          <video controls poster="assets/lamka_talk_logo.png" style="width:100%; max-height:280px; object-fit:cover; display:block;">
+            <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" type="video/mp4">
+            Your browser does not support HTML5 video.
+          </video>
+        </div>
         <div class="post-footer">
           <span><i class="fa-regular fa-thumbs-up"></i> ${p1.likes} Likes</span>
           <span><i class="fa-regular fa-comment"></i> ${p1.comments} Comments</span>
+          <a href="https://www.facebook.com/profile.php?id=61590385077994" target="_blank" style="color:#1877F2; font-size:0.8rem; font-weight:600; text-decoration:underline;">Watch on Facebook &rarr;</a>
         </div>
       </div>
 
@@ -610,12 +617,19 @@ document.addEventListener('DOMContentLoaded', () => {
           <span><i class="fa-brands fa-facebook"></i> ${p2.author}</span>
           <span><i class="${p2.icon}" style="font-size:0.75rem; color:${p2.badgeColor};"></i> ${p2.badge} &bull; ${p2.time}</span>
         </div>
-        <p class="post-text" style="font-size:1rem; font-weight:500; line-height:1.5;">
+        <p class="post-text" style="font-size:0.98rem; font-weight:500; line-height:1.5; margin-bottom:10px;">
           ${p2.text}
         </p>
+        <div class="fb-video-wrapper" style="position:relative; width:100%; border-radius:10px; overflow:hidden; background:#000; margin-bottom:10px; border:1px solid rgba(255,255,255,0.12);">
+          <video controls poster="assets/lamka_talk_header_logo.jpg" style="width:100%; max-height:280px; object-fit:cover; display:block;">
+            <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4" type="video/mp4">
+            Your browser does not support HTML5 video.
+          </video>
+        </div>
         <div class="post-footer">
           <span><i class="fa-regular fa-thumbs-up"></i> ${p2.likes} Likes</span>
           <span><i class="fa-regular fa-comment"></i> ${p2.comments} Comments</span>
+          <a href="https://www.facebook.com/profile.php?id=61590385077994" target="_blank" style="color:#1877F2; font-size:0.8rem; font-weight:600; text-decoration:underline;">Watch on Facebook &rarr;</a>
         </div>
       </div>
     `;
