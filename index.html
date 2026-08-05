@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <!-- Custom Stylesheet -->
-  <link rel="stylesheet" href="styles.css?v=2.6">
+  <link rel="stylesheet" href="styles.css?v=2.7">
 </head>
 <body>
 
@@ -728,7 +728,12 @@
           </div>
 
           <div class="form-group" style="margin-bottom:1.5rem;">
-            <label style="display:block; font-size:0.85rem; color:#aaa; margin-bottom:6px; font-weight:600;">Admin Security Passcode / PIN</label>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+              <label style="font-size:0.85rem; color:#aaa; font-weight:600;">Admin Security Passcode / PIN</label>
+              <button type="button" id="btn-reset-passcode" style="background:none; border:none; color:#ef4444; font-size:0.78rem; font-weight:600; text-decoration:underline; cursor:pointer;">
+                <i class="fa-solid fa-key"></i> Reset / Change Passcode
+              </button>
+            </div>
             <input type="password" id="admin-news-pin" placeholder="Enter Admin Passcode (Default: 1234)" required style="width:100%; padding:10px; background:#181d28; color:#fff; border:1px solid rgba(230,25,36,0.5); border-radius:8px;">
           </div>
           
@@ -741,6 +746,6 @@
   </div>
 
   <!-- App Logic JS -->
-  <script src="app.js?v=2.6"></script>
+  <script src="app.js?v=2.7"></script>
 </body>
 </html>

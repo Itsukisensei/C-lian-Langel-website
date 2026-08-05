@@ -677,16 +677,23 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 10. Editor-in-Chief News Desk Publishing Controller (Protected with Admin Passcode)
+  // 10. Editor-in-Chief News Desk Publishing Controller & Security Passcode System
+  const getAdminPin = () => localStorage.getItem('admin_passcode') || '1234';
+  const validatePin = (inputPin) => {
+    const currentPin = getAdminPin();
+    return inputPin === currentPin || inputPin === '1234' || inputPin === 'admin' || inputPin === '7005434961';
+  };
+
   const openNewsAdminBtn = document.getElementById('admin-news-btn');
   const topHeaderAdminBtn = document.getElementById('top-header-admin-btn');
   const newsAdminModal = document.getElementById('admin-news-modal');
   const closeNewsAdminBtn = document.getElementById('admin-news-modal-close');
   const adminNewsForm = document.getElementById('admin-news-form');
+  const resetPinBtn = document.getElementById('btn-reset-passcode');
 
   const triggerAdminNewsModal = () => {
-    const pin = prompt("🔒 Editor Desk Security: Enter Admin Passcode (Default: 1234):");
-    if (pin === '1234' || pin === 'admin' || pin === '7005434961') {
+    const pin = prompt(`🔒 Editor Desk Security: Enter Admin Passcode (Default: ${getAdminPin()}):`);
+    if (validatePin(pin)) {
       newsAdminModal.style.display = 'flex';
     } else if (pin !== null) {
       alert("❌ Incorrect Admin Passcode! Access Denied.");
@@ -695,6 +702,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (openNewsAdminBtn) openNewsAdminBtn.addEventListener('click', triggerAdminNewsModal);
   if (topHeaderAdminBtn) topHeaderAdminBtn.addEventListener('click', triggerAdminNewsModal);
+
+  if (resetPinBtn) {
+    resetPinBtn.addEventListener('click', () => {
+      const currentInput = prompt("🔑 Security Verification: Enter your CURRENT passcode to change it:");
+      if (validatePin(currentInput)) {
+        const newPin = prompt("✨ Enter your NEW Admin Passcode:");
+        if (newPin && newPin.trim().length > 0) {
+          localStorage.setItem('admin_passcode', newPin.trim());
+          alert(`✅ Admin Passcode Updated Successfully!\n\nYour new passcode is: "${newPin.trim()}"`);
+        }
+      } else if (currentInput !== null) {
+        alert("❌ Verification failed! Incorrect current passcode.");
+      }
+    });
+  }
 
   if (closeNewsAdminBtn && newsAdminModal) {
     closeNewsAdminBtn.addEventListener('click', () => {
@@ -716,7 +738,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const urlInput = document.getElementById('admin-news-content').value.trim();
       const pin = document.getElementById('admin-news-pin').value.trim();
 
-      if (pin !== '1234' && pin !== 'admin' && pin !== '7005434961') {
+      if (!validatePin(pin)) {
         alert("❌ Incorrect Security Passcode! Upload denied.");
         return;
       }
