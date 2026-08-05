@@ -424,9 +424,10 @@ document.addEventListener('DOMContentLoaded', () => {
     fbFollowers: 2200,
     fbLikes: 5,
     igFollowers: 743,
-    igPosts: 60,
-    igLikes1: 214,
-    igLikes2: 315,
+    igPosts: 61,
+    igFollowing: 417,
+    igLikes1: 412,
+    igLikes2: 328,
     ytSubs: 104000,
     ytVids: 595
   };
@@ -448,6 +449,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const fbLikEl = document.getElementById('fb-likes-val');
     const igFolEl = document.getElementById('ig-followers-val');
     const igPostEl = document.getElementById('ig-posts-val');
+    const igFingEl = document.getElementById('ig-following-val');
     const igL1El = document.getElementById('ig-like-1');
     const igL2El = document.getElementById('ig-like-2');
     const ytSubEl = document.getElementById('yt-sub-val');
@@ -456,6 +458,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (fbLikEl) fbLikEl.textContent = liveStats.fbLikes.toLocaleString();
     if (igFolEl) igFolEl.textContent = liveStats.igFollowers.toLocaleString();
     if (igPostEl) igPostEl.textContent = liveStats.igPosts.toLocaleString();
+    if (igFingEl) igFingEl.textContent = liveStats.igFollowing.toLocaleString();
     if (igL1El) igL1El.textContent = liveStats.igLikes1.toLocaleString();
     if (igL2El) igL2El.textContent = liveStats.igLikes2.toLocaleString();
     if (ytSubEl) ytSubEl.textContent = liveStats.ytSubs.toLocaleString();
