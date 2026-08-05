@@ -512,13 +512,23 @@ document.addEventListener('DOMContentLoaded', () => {
   const fbPostPool = [
     {
       author: "LAMKA TALK 2.0",
-      time: "Just now",
-      badge: "LIVE BULLETIN",
-      icon: "fa-solid fa-circle",
-      badgeColor: "#22c55e",
-      text: "<strong>LAMKA TALK 2.0:</strong> Live ground coverage on Churachandpur district updates, public notices, and youth development initiatives. Hosted by C Lian Langel.",
-      likes: 86,
-      comments: 14
+      time: "3h ago",
+      badge: "FEATURED MUSIC VIDEO",
+      icon: "fa-solid fa-music",
+      badgeColor: "#ef4444",
+      text: "Na lasak a tak mahmah a enkha ding chi a kilawp lawtel i hi aw nau. Tua hon chial zawmah lai chu hong lawtel ding aw nanau Esther 🔥❤️ <strong style='color:#4BA9FE;'>Esther Hnamte</strong>",
+      likes: 142,
+      comments: 28
+    },
+    {
+      author: "LAMKA TALK 2.0",
+      time: "5h ago",
+      badge: "MEDIA REPORT",
+      icon: "fa-solid fa-newspaper",
+      badgeColor: "#e61924",
+      text: "Press Desk: Ground reporting &amp; daily print edition updates for <strong>The Lamka Times</strong> &amp; <strong>Lamka Talk 2.0</strong> in Churachandpur, Manipur.",
+      likes: 89,
+      comments: 15
     },
     {
       author: "LAMKA TALK 2.0",
