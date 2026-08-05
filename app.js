@@ -438,4 +438,31 @@ document.addEventListener('DOMContentLoaded', () => {
       setTimeout(() => icon.classList.remove('fa-spin'), 1000);
     });
   }, 12000); // Auto-syncs simultaneously every 12 seconds
+
+  // 7. Mobile Navigation Drawer Controller
+  const mobileToggleBtn = document.getElementById('mobile-menu-toggle');
+  const navLinksUl = document.getElementById('nav-links');
+
+  if (mobileToggleBtn && navLinksUl) {
+    mobileToggleBtn.addEventListener('click', () => {
+      navLinksUl.classList.toggle('mobile-active');
+      const icon = mobileToggleBtn.querySelector('i');
+      if (icon) {
+        if (navLinksUl.classList.contains('mobile-active')) {
+          icon.className = 'fa-solid fa-xmark';
+        } else {
+          icon.className = 'fa-solid fa-bars';
+        }
+      }
+    });
+
+    // Close menu when tapping any navigation link
+    navLinksUl.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinksUl.classList.remove('mobile-active');
+        const icon = mobileToggleBtn.querySelector('i');
+        if (icon) icon.className = 'fa-solid fa-bars';
+      });
+    });
+  }
 });
