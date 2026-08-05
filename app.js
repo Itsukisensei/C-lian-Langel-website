@@ -421,8 +421,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 6. Dynamic Live Auto-Sync Ticker Controller (Facebook, Instagram & YouTube)
   let liveStats = {
-    fbFollowers: 5420,
-    fbLikes: 4850,
+    fbFollowers: 2200,
+    fbLikes: 5,
     igFollowers: 743,
     igPosts: 60,
     igLikes1: 214,
@@ -433,12 +433,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   setInterval(() => {
     // Apply realistic micro-fluctuations to live statistics
-    const deltaFb = Math.floor(Math.random() * 3) - 1; // -1, 0, +1, +2
+    const deltaFb = Math.floor(Math.random() * 2); // 0 or +1
     const deltaIg = Math.floor(Math.random() * 2); // 0 or +1
     const deltaYt = Math.floor(Math.random() * 5); // 0 to +4
 
-    liveStats.fbFollowers = Math.max(5410, liveStats.fbFollowers + deltaFb);
-    liveStats.fbLikes = Math.max(4840, liveStats.fbLikes + Math.max(0, deltaFb));
+    liveStats.fbFollowers = Math.max(2200, liveStats.fbFollowers + deltaFb);
     liveStats.igFollowers = Math.max(740, liveStats.igFollowers + deltaIg);
     liveStats.igLikes1 += Math.floor(Math.random() * 2);
     liveStats.igLikes2 += Math.floor(Math.random() * 2);
@@ -453,7 +452,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const igL2El = document.getElementById('ig-like-2');
     const ytSubEl = document.getElementById('yt-sub-val');
 
-    if (fbFolEl) fbFolEl.textContent = liveStats.fbFollowers.toLocaleString();
+    if (fbFolEl) fbFolEl.textContent = (liveStats.fbFollowers / 1000).toFixed(1) + 'K';
     if (fbLikEl) fbLikEl.textContent = liveStats.fbLikes.toLocaleString();
     if (igFolEl) igFolEl.textContent = liveStats.igFollowers.toLocaleString();
     if (igPostEl) igPostEl.textContent = liveStats.igPosts.toLocaleString();
@@ -508,31 +507,31 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 8. Facebook Live Posts Auto-Rotator & Dynamic Feed Manager
+  // 8. Facebook Live Posts Pool & Dynamic Feed Manager
   const fbPostPool = [
+    {
+      author: "LAMKA TALK 2.0",
+      time: "6m ago",
+      badge: "LATEST FESTIVAL VIDEO",
+      icon: "fa-solid fa-video",
+      badgeColor: "#22c55e",
+      poster: "assets/lamka_talk_logo.png",
+      videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
+      text: "Mizoram apan lasiam Ruatpuii in TANGMAI FESTIVAL 2026 uap chiat ding Lamka mipite chialna bawl hi",
+      likes: 76,
+      comments: 14
+    },
     {
       author: "LAMKA TALK 2.0",
       time: "3h ago",
       badge: "FEATURED MUSIC VIDEO",
       icon: "fa-solid fa-music",
       badgeColor: "#ef4444",
-      poster: "assets/lamka_talk_logo.png",
-      videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
+      poster: "assets/lamka_talk_header_logo.jpg",
+      videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
       text: "Na lasak a tak mahmah a enkha ding chi a kilawp lawtel i hi aw nau. Tua hon chial zawmah lai chu hong lawtel ding aw nanau Esther 🔥❤️ <strong style='color:#4BA9FE;'>Esther Hnamte</strong>",
       likes: 142,
       comments: 28
-    },
-    {
-      author: "LAMKA TALK 2.0",
-      time: "5h ago",
-      badge: "EXCLUSIVE VIDEO BULLETIN",
-      icon: "fa-solid fa-video",
-      badgeColor: "#e61924",
-      poster: "assets/lamka_talk_header_logo.jpg",
-      videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
-      text: "<strong>LAMKA TALK 2.0:</strong> Live ground reporting &amp; socio-political analysis from Lamka (Churachandpur), Manipur. Hosted by C Lian Langel.",
-      likes: 89,
-      comments: 15
     },
     {
       author: "C Lian Langel",
@@ -557,18 +556,6 @@ document.addEventListener('DOMContentLoaded', () => {
       text: "<strong>Host:</strong> Who will win the match, Argentina or England?<br><strong style='color:#1877F2;'>Me:</strong> If it's not Argentina... then it'll be England! 🤣🤣🤣🤣",
       likes: 182,
       comments: 41
-    },
-    {
-      author: "LAMKA TALK 2.0",
-      time: "4h ago",
-      badge: "BREAKING NEWS",
-      icon: "fa-solid fa-newspaper",
-      badgeColor: "#e61924",
-      poster: "assets/lamka_talk_logo.png",
-      videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyflights.mp4",
-      text: "<strong>NIT MANIPUR:</strong> Manipur government in NIT Manipur permanent campus om theihna di'n panla...",
-      likes: 210,
-      comments: 53
     }
   ];
 
@@ -630,4 +617,60 @@ document.addEventListener('DOMContentLoaded', () => {
     postIndex = (postIndex + 1) % fbPostPool.length;
     renderFbPosts();
   }, 15000);
+
+  // 9. Admin Post Studio Controller
+  const openAdminBtn = document.getElementById('open-admin-post-btn');
+  const adminModal = document.getElementById('admin-post-modal');
+  const closeAdminBtn = document.getElementById('admin-modal-close');
+  const adminForm = document.getElementById('admin-publish-form');
+
+  if (openAdminBtn && adminModal) {
+    openAdminBtn.addEventListener('click', () => {
+      adminModal.style.display = 'flex';
+    });
+  }
+
+  if (closeAdminBtn && adminModal) {
+    closeAdminBtn.addEventListener('click', () => {
+      adminModal.style.display = 'none';
+    });
+  }
+
+  if (adminModal) {
+    adminModal.addEventListener('click', (e) => {
+      if (e.target === adminModal) adminModal.style.display = 'none';
+    });
+  }
+
+  if (adminForm) {
+    adminForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const caption = document.getElementById('admin-post-caption').value.trim();
+      const media = document.getElementById('admin-post-media').value.trim();
+
+      if (!caption) return;
+
+      const newPost = {
+        author: "LAMKA TALK 2.0",
+        time: "Just now",
+        badge: "ADMIN POST",
+        icon: "fa-solid fa-pen-to-square",
+        badgeColor: "#22c55e",
+        poster: "assets/lamka_talk_logo.png",
+        videoUrl: media || "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
+        text: caption,
+        likes: 1,
+        comments: 0
+      };
+
+      // Add to top of post pool & reset index to 0
+      fbPostPool.unshift(newPost);
+      postIndex = 0;
+      renderFbPosts();
+
+      adminModal.style.display = 'none';
+      adminForm.reset();
+      alert("🎉 Post published live to your website feed!");
+    });
+  }
 });
