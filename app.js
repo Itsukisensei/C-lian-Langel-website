@@ -507,4 +507,113 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   }
+
+  // 8. Facebook Live Posts Auto-Rotator & Dynamic Feed Manager
+  const fbPostPool = [
+    {
+      author: "LAMKA TALK 2.0",
+      time: "Just now",
+      badge: "LIVE BULLETIN",
+      icon: "fa-solid fa-circle",
+      badgeColor: "#22c55e",
+      text: "<strong>LAMKA TALK 2.0:</strong> Live ground coverage on Churachandpur district updates, public notices, and youth development initiatives. Hosted by C Lian Langel.",
+      likes: 86,
+      comments: 14
+    },
+    {
+      author: "LAMKA TALK 2.0",
+      time: "15m ago",
+      badge: "VIDEO REPORT",
+      icon: "fa-solid fa-video",
+      badgeColor: "#e74c3c",
+      text: "Press desk updates: Today's print edition of <strong>The Lamka Times</strong> is available alongside <strong>Lamka Talk 2.0</strong> video bulletins. Connect with us for real-time news coverage.",
+      likes: 124,
+      comments: 29
+    },
+    {
+      author: "C Lian Langel",
+      time: "1h ago",
+      badge: "CREATOR POST",
+      icon: "fa-solid fa-feather-pointed",
+      badgeColor: "#3b82f6",
+      text: "Bangteng honna post sak na hi ua huirong 😄",
+      likes: 95,
+      comments: 18
+    },
+    {
+      author: "LAMKA TALK 2.0",
+      time: "2h ago",
+      badge: "SPECIAL REEL",
+      icon: "fa-solid fa-film",
+      badgeColor: "#f59e0b",
+      text: "<strong>Host:</strong> Who will win the match, Argentina or England?<br><strong style='color:#1877F2;'>Me:</strong> If it's not Argentina... then it'll be England! 🤣🤣🤣🤣",
+      likes: 182,
+      comments: 41
+    },
+    {
+      author: "LAMKA TALK 2.0",
+      time: "4h ago",
+      badge: "BREAKING NEWS",
+      icon: "fa-solid fa-newspaper",
+      badgeColor: "#e61924",
+      text: "<strong>NIT MANIPUR:</strong> Manipur government in NIT Manipur permanent campus om theihna di'n panla...",
+      likes: 210,
+      comments: 53
+    },
+    {
+      author: "LAMKA TALK 2.0",
+      time: "6h ago",
+      badge: "HEROISM REPORT",
+      icon: "fa-solid fa-shield-halved",
+      badgeColor: "#10b981",
+      text: "<strong>HEROISM:</strong> ZYA Kangkap Unit in tui a kia hunkhia naupang 2 kiang ah pahtawina pia...",
+      likes: 312,
+      comments: 77
+    }
+  ];
+
+  let postIndex = 0;
+  const renderFbPosts = () => {
+    const container = document.getElementById('fb-posts-container');
+    if (!container) return;
+    
+    const p1 = fbPostPool[postIndex % fbPostPool.length];
+    const p2 = fbPostPool[(postIndex + 1) % fbPostPool.length];
+
+    container.innerHTML = `
+      <div class="post-card" style="animation: fadeInDown 0.4s ease-out;">
+        <div class="post-header">
+          <span><i class="fa-brands fa-facebook"></i> ${p1.author}</span>
+          <span><i class="${p1.icon}" style="font-size:0.75rem; color:${p1.badgeColor};"></i> ${p1.badge} &bull; ${p1.time}</span>
+        </div>
+        <p class="post-text" style="font-size:1rem; font-weight:500; line-height:1.5;">
+          ${p1.text}
+        </p>
+        <div class="post-footer">
+          <span><i class="fa-regular fa-thumbs-up"></i> ${p1.likes} Likes</span>
+          <span><i class="fa-regular fa-comment"></i> ${p1.comments} Comments</span>
+        </div>
+      </div>
+
+      <div class="post-card" style="animation: fadeInDown 0.4s ease-out;">
+        <div class="post-header">
+          <span><i class="fa-brands fa-facebook"></i> ${p2.author}</span>
+          <span><i class="${p2.icon}" style="font-size:0.75rem; color:${p2.badgeColor};"></i> ${p2.badge} &bull; ${p2.time}</span>
+        </div>
+        <p class="post-text" style="font-size:1rem; font-weight:500; line-height:1.5;">
+          ${p2.text}
+        </p>
+        <div class="post-footer">
+          <span><i class="fa-regular fa-thumbs-up"></i> ${p2.likes} Likes</span>
+          <span><i class="fa-regular fa-comment"></i> ${p2.comments} Comments</span>
+        </div>
+      </div>
+    `;
+  };
+
+  // Rotate Facebook live posts every 15 seconds
+  setInterval(() => {
+    postIndex = (postIndex + 1) % fbPostPool.length;
+    renderFbPosts();
+  }, 15000);
 });
